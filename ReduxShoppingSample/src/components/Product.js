@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import "./Product.css";
-import { cartActions } from "../store/cart-slice";
+import { cartActions } from "../store/cart-clice";
 
+import "./Product.css";
 const Product = ({ name, id, imgURL, price }) => {
   const dispatch = useDispatch();
   const addToCart = () => {
@@ -14,7 +14,6 @@ const Product = ({ name, id, imgURL, price }) => {
       })
     );
   };
-
   return (
     <div className="card">
       <img src={imgURL} alt={name} />

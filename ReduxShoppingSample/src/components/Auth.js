@@ -11,7 +11,6 @@ const Auth = () => {
     // dispatch
     dispatch(authActions.login());
   };
-
   return (
     <div className="container">
       <h1>Login</h1>{" "}

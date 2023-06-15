@@ -1,18 +1,34 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { uiActions } from "./ui-slice";
+
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
     itemsList: [],
     totalQuantity: 0,
-    showCart: false,
   },
   reducers: {
+    replaceData(state, action) {
+      state.totalQuantity = action.payload.totalQuantity;
+      console.log("what here ", action.payload.itemsList);
+      if (action.payload.itemsList) {
+        state.itemsList = action.payload.itemsList;
+      } else {
+        state.itemsList = [];
+      }
+      //state.itemsList = action.payload.itemsList;
+      //state.itemsList = [];
+    },
     addToCart(state, action) {
+      state.changed = true;
       const newItem = action.payload;
       // to check if item is already available
+      console.log("action payload: ", action.payload);
+      console.log("itemList value: ", state.itemsList);
       const existingItem = state.itemsList.find(
         (item) => item.id === newItem.id
       );
+
       if (existingItem) {
         existingItem.quantity++;
         existingItem.totalPrice += newItem.price;
@@ -28,6 +44,7 @@ const cartSlice = createSlice({
       }
     },
     removeFromCart(state, action) {
+      state.changed = true;
       const id = action.payload;
 
       const existingItem = state.itemsList.find((item) => item.id === id);
